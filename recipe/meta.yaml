@@ -18,7 +18,7 @@ build:
 
 requirements:
   build:
-    - gnuconfig  # [unix]
+    - gnuconfig
     - {{ compiler('c') }}
     - make
     - bison
@@ -27,7 +27,7 @@ requirements:
     - patch     # [not win]
     - m2-patch  # [win]
   host:
-    - libgsf  1.14.*
+    - libgsf 1.14.*
     - libuuid
     - libxml2
     - gcab
