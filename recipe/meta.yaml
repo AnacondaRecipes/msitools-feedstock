@@ -26,6 +26,7 @@ requirements:
     - pkg-config
     - patch     # [not win]
     - m2-patch  # [win]
+    - perl
   host:
     - libgsf 1.14.*
     - libuuid
