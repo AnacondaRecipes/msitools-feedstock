@@ -24,15 +24,16 @@ requirements:
     - bison
     - flex
     - pkg-config
-    - patch  # [not win]
+    - patch     # [not win]
+    - m2-patch  # [win]
   host:
-    - libgsf
+    - libgsf  1.14.*
     - libuuid
     - libxml2
     - gcab
     - glib
   run:
-    - {{ pin_compatible("libgsf", max_pin="x.x") }}
+    - libgsf >=1.14,<1.15
 
 test:
   commands:
