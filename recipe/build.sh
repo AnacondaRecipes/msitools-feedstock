@@ -4,7 +4,8 @@ cp $BUILD_PREFIX/share/gnuconfig/config.* ./build-aux
 
 ./configure --prefix=$PREFIX
 make -j${CPU_COUNT}
-if [[ ("${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}" != "") && "${target_platform}" != osx-64  ]]; then
+# on osx test 20 Stable component GUIDs fails
+#if "${target_platform}" != osx-*  ]]; then
   make check -j${CPU_COUNT}
-fi
+#fi
 make install

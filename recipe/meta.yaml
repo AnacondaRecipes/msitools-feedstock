@@ -22,6 +22,7 @@ requirements:
     - {{ compiler('c') }}
     - make
     - bison
+    - gawk
     - flex
     - pkg-config
     - patch     # [not win]
@@ -29,12 +30,14 @@ requirements:
     - perl
   host:
     - libgsf 1.14.*
-    - libuuid
+    - libuuid <2
     - libxml2
     - gcab
     - glib
+    - gettext  # [osx]
   run:
     - libgsf >=1.14,<1.15
+    - gettext  # [osx]
 
 test:
   commands:
