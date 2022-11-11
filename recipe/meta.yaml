@@ -12,26 +12,32 @@ source:
     - byte-order-osx.patch
 
 build:
-  number: 2
+  number: 0
   # Not supported on win
   skip: True   # [win]
 
 requirements:
   build:
-    - gnuconfig  # [unix]
+    - gnuconfig
     - {{ compiler('c') }}
     - make
     - bison
+    - gawk
     - flex
     - pkg-config
+    - patch     # [not win]
+    - m2-patch  # [win]
+    - perl
   host:
-    - libgsf
-    - libuuid
+    - libgsf 1.14.*
+    - libuuid <2
     - libxml2
     - gcab
     - glib
+    - gettext  # [osx]
   run:
-    - {{ pin_compatible("libgsf", max_pin="x.x") }}
+    - libgsf >=1.14,<1.15
+    - gettext  # [osx]
 
 test:
   commands:
@@ -45,7 +51,12 @@ about:
   license_family: LGPL
   license_file:
     - COPYING.LIB
-  summary: 'Simple, fast, extensible JSON encoder/decoder for Python'
+  summary: msitools is a set of programs to inspect and build Windows Installer (.MSI) files
+  description: |
+    msitools is a set of programs to inspect and build Windows Installer
+    (.MSI) files. It is based on libmsi, a portable library to read and
+    write .MSI files. libmsi in turn is a port of (and a subset of)
+    Wine's implementation of the Windows Installer.
   doc_url: https://wiki.gnome.org/msitools/HowTo/CreateLibraryWxi
   dev_url: https://gitlab.gnome.org/GNOME/msitools
 
@@ -53,3 +64,4 @@ extra:
   recipe-maintainers:
     - isuruf
     - xhochy
+    - katietz
