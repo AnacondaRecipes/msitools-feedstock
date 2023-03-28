@@ -28,14 +28,14 @@ requirements:
     - perl 5.*
     - pkg-config
   host:
-    - gcab
-    - gettext  # [osx]
+    - gcab 1.4
+    - gettext 0.21.0  # [osx]
     - glib
-    - libgsf 1.14.*
-    - libuuid <2
+    - libgsf 1.14
+    - libuuid 1.41.5
     - libxml2 2.10
   run:
-    - gettext  # [osx]
+    - gettext >=0.21.0,<1.0a0  # [osx]
     - libgsf >=1.14,<1.15
 
 test:
