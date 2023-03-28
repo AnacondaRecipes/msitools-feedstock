@@ -6,38 +6,37 @@ package:
   version: {{ version }}
 
 source:
-  url: http://ftp.gnome.org/pub/GNOME/sources/msitools/{{ version }}/msitools-{{ version }}.tar.xz
+  url: https://ftp.gnome.org/pub/GNOME/sources/msitools/{{ version }}/msitools-{{ version }}.tar.xz
   sha256: bbf1a6e3a9c2323b860a3227ac176736a3eafc4a44a67346c6844591f10978ea
-  patches:
-    - byte-order-osx.patch
+  patches:  # [osx]
+    - byte-order-osx.patch  # [osx]
 
 build:
-  number: 0
+  number: 1
   # Not supported on win
   skip: True   # [win]
 
 requirements:
   build:
-    - gnuconfig
     - {{ compiler('c') }}
-    - make
     - bison
-    - gawk
     - flex
+    - gawk
+    - gnuconfig
+    - make
+    - patch     # [osx]
+    - perl 5.*
     - pkg-config
-    - patch     # [not win]
-    - m2-patch  # [win]
-    - perl
   host:
-    - libgsf 1.14.*
-    - libuuid <2
-    - libxml2
-    - gcab
+    - gcab 1.4
+    - gettext 0.21.0  # [osx]
     - glib
-    - gettext  # [osx]
+    - libgsf 1.14
+    - libuuid 1.41.5
+    - libxml2 2.10
   run:
+    - gettext >=0.21.0,<1.0a0  # [osx]
     - libgsf >=1.14,<1.15
-    - gettext  # [osx]
 
 test:
   commands:
