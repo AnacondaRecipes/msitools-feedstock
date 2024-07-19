@@ -1,1 +1,4 @@
 aggregate_branch: libxml_2.13.1
+
+channels:
+  - https://staging.continuum.io/prefect/fs/libgsf-feedstock/pr3/ad5d993
