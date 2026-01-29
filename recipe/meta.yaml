@@ -1,5 +1,5 @@
 {% set name = "msitools" %}
-{% set version = "0.100" %}
+{% set version = "0.106" %}
 
 package:
   name: {{ name|lower }}
@@ -7,49 +7,48 @@ package:
 
 source:
   url: https://ftp.gnome.org/pub/GNOME/sources/msitools/{{ version }}/msitools-{{ version }}.tar.xz
-  sha256: bbf1a6e3a9c2323b860a3227ac176736a3eafc4a44a67346c6844591f10978ea
-  patches:  # [osx]
-    - byte-order-osx.patch  # [osx]
+  sha256: 1ed34279cf8080f14f1b8f10e649474125492a089912e7ca70e59dfa2e5a659b
 
 build:
-  number: 2
+  number: 0
   # Not supported on win
   skip: True   # [win]
 
 requirements:
   build:
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
+    - meson >=1.4
+    - vala
     - bison
     - flex
-    - gawk
-    - gnuconfig
-    - make
-    - patch     # [osx]
     - perl 5.*
+    - gnuconfig
+    - ninja-base
     - pkg-config
+    - setuptools  # needed for vapigen/g-ir-scanner during build
   host:
-    - gcab 1.4
-    - gettext 0.21.0  # [osx]
-    - glib
-    - libgsf 1.14
-    - libuuid 1.41.5
-    - libxml2 {{ libxml2 }}
+    - gcab >=0.1.10
+    - gettext >=0.21.0  # [osx]
+    - glib >= 2.12
+    - libgsf >=1.14
+    - libxml2 >=2.7
+    - gobject-introspection  # needed for vapigen/g-ir-scanner during build
   run:
     - gettext >=0.21.0,<1.0a0  # [osx]
-    - libgsf >=1.14,<1.15
 
 test:
   commands:
     - test -f $PREFIX/include/libmsi-1.0/libmsi.h
-    - test -f $PREFIX/lib/libmsi${SHLIB_EXT}
+    - test -f $PREFIX/lib/libmsi-1.0${SHLIB_EXT}
     - msiextract --help
+    - wixl --help
 
 about:
   home: https://wiki.gnome.org/msitools
   license: LGPL-2.1-or-later
   license_family: LGPL
-  license_file:
-    - COPYING.LIB
+  license_file: copyright
   summary: msitools is a set of programs to inspect and build Windows Installer (.MSI) files
   description: |
     msitools is a set of programs to inspect and build Windows Installer
