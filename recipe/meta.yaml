@@ -30,7 +30,7 @@ requirements:
   host:
     - gcab >=0.1.10
     - gettext >=0.21.0  # [osx]
-    - glib >= 2.12
+    - glib >=2.12
     - libgsf >=1.14
     - libxml2 >=2.7
     - gobject-introspection  # needed for vapigen/g-ir-scanner during build
